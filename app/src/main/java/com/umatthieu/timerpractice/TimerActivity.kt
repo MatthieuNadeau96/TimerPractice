@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.umatthieu.timerpractice.util.NotificationUitil
 import com.umatthieu.timerpractice.util.PrefUtil
 //import com.umatthieu.timerpractice.R.id.fab
 
@@ -86,7 +87,7 @@ class TimerActivity : AppCompatActivity() {
         initTimer()
 
         removeAlarm(this)
-        //TODO: hide notification
+        NotificationUitil.hideTimerNotification(this)
     }
 
     override fun onPause() {
@@ -95,9 +96,9 @@ class TimerActivity : AppCompatActivity() {
         if(timerState == TimerState.Running){
             timer.cancel()
             val wakeUpTime = setAlarm(this, nowSeconds, secondsRemaining)
-            // TODO: show notification
+            NotificationUitil.showTimerRunning(this, wakeUpTime)
         } else if (timerState == TimerState.Paused) {
-            // TODO: show notification
+            NotificationUitil.showTimerPaused(this)
         }
 
         PrefUtil.setPreviousTimerLengthSeconds(timerLengthSeconds, this)
