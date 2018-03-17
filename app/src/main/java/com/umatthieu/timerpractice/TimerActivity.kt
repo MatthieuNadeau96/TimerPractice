@@ -47,6 +47,10 @@ class TimerActivity : AppCompatActivity() {
         Stopped, Paused, Running
     }
 
+    enum class SessionType {
+        Work, Break, LongBreak
+    }
+
     private lateinit var timer: CountDownTimer
     private var timerLengthSeconds = 0L
     private var timerState = TimerState.Stopped
